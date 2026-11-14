@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="referrer" content="no-referrer">
+<meta name="built" content="1795017283">
+<meta name="description" content="An open, forkable news aggregator. Your sources, your rules.">
+<meta name="theme-color" content="#f5f6f8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Crect x=%222%22 y=%225%22 width=%225%22 height=%2214%22 rx=%222%22 fill=%22%232563eb%22/%3E%3Crect x=%229.5%22 y=%225%22 width=%225%22 height=%2214%22 rx=%222%22 fill=%22%2394a3b8%22/%3E%3Crect x=%2217%22 y=%225%22 width=%225%22 height=%2214%22 rx=%222%22 fill=%22%23dc2626%22/%3E%3C/svg%3E">
+<title>Settings · Tally News</title>
+<link rel="stylesheet" href="style.css">
+<link rel="alternate" type="application/atom+xml" title="Tally News" href="feed.xml"><link rel="alternate" type="application/atom+xml" title="Tally News · Breaking" href="breaking.xml"><link rel="alternate" type="application/atom+xml" title="Tally News · Blindspots" href="blindspots.xml">
+<script src="app.js" defer></script>
+<script src="clips.js" defer></script>
+</head><body data-page="settings" data-base="">
+<!--
+THESIS: A news-aggregator utility that looks like the category it belongs to, with every rule, source and label in plain view; refuses mystique; machine-written text is always labelled, and any stated perspective is added later and kept separate.
+OWN-WORLD: The category standard played straight: white and near-black surfaces, system sans, one teal accent for actions, muted blue, gray and red for left, center and right always paired with a word; light and dark by device.
+STORY: A reader sees how each side covers a story, why it is listed, and can change sources, filters and settings, or fork the code.
+FIRST VIEWPORT: Header with name and nav, section tabs, compact Show controls with the ordering rule, a swipeable strip of tall clip cards, then the Videos row (six on desktop, the rest a tap away), then the first story with its coverage bar.
+FORM: Category standard (the standing exit), AllSides, Feedly and Ground News as the bar; seed 3394116d.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+-->
+<a class="skip" href="#main">Skip to main content</a>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html" aria-label="Tally News, home"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="5" height="14" rx="2" fill="var(--left)"/><rect x="9.5" y="5" width="5" height="14" rx="2" fill="var(--center)"/><rect x="17" y="5" width="5" height="14" rx="2" fill="var(--right)"/></svg><span>Tally News</span></a>
+<nav class="primary" aria-label="Main"><a href="index.html"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h11v14H7a2 2 0 0 1-2-2V5z"/><path d="M16 9h3v8a2 2 0 0 1-2 2"/><path d="M8 9h5M8 12h5M8 15h3"/></svg><span>News</span></a><a href="latest.html"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7v5l3 2"/><circle cx="12" cy="12" r="8"/></svg><span>Latest</span></a><a href="sources.html"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 7h10M9 12h10M9 17h10"/><path d="M5 7h.01M5 12h.01M5 17h.01"/></svg><span>Sources</span></a><a href="settings.html" aria-current="page"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h8M17 8h2M5 16h2M11 16h8"/><circle cx="15" cy="8" r="2"/><circle cx="9" cy="16" r="2"/></svg><span>Settings</span></a></nav>
+</div></header>
+<main id="main" tabindex="-1"><div class="page">
+<h1>Settings</h1>
+<p class="lede">Saved only in this browser, on this device. There is no account and nothing is sent anywhere.</p>
+
+<h2>Show</h2>
+<div class="list">
+<button class="trow" role="switch" data-set="lean.left"><span class="lbl"><b>Left</b><span class="d">Outlets labeled left.</span></span><span class="knob" aria-hidden="true"></span></button>
+<button class="trow" role="switch" data-set="lean.center"><span class="lbl"><b>Center</b><span class="d">Outlets labeled center.</span></span><span class="knob" aria-hidden="true"></span></button>
+<button class="trow" role="switch" data-set="lean.right"><span class="lbl"><b>Right</b><span class="d">Outlets labeled right.</span></span><span class="knob" aria-hidden="true"></span></button>
+</div>
+
+<h2>Reading</h2>
+<div class="list">
+<button class="trow" role="switch" data-set="signals"><span class="lbl"><b>Popularity signals</b><span class="d">Shares on Mastodon, Bluesky trends, Hacker News points and video views. Information only; they never change the order.</span></span><span class="knob" aria-hidden="true"></span></button>
+<button class="trow" role="switch" data-set="newMarks"><span class="lbl"><b>Mark what&rsquo;s new</b><span class="d">Tag stories that gained coverage since you last opened the news page on this device.</span></span><span class="knob" aria-hidden="true"></span></button>
+</div>
+
+<h2>Sources</h2>
+<div class="list"><div class="row-actions"><p id="offCount">All sources are on.</p><a class="btn" href="sources.html">Choose sources</a></div></div>
+
+<h2>Back up or move your settings</h2>
+<div class="list"><div class="row-actions"><p>Save your settings to a file, or load one from another device.</p>
+<span class="btns"><button class="btn" id="export" type="button">Export</button> <button class="btn" id="import" type="button">Import</button></span></div></div>
+<input type="file" id="file" accept="application/json,.json" hidden>
+<p class="status-line" id="status" role="status" aria-live="polite"></p>
+
+<h2>Reset</h2>
+<div class="list"><div class="row-actions"><p>Put every switch back to its default.</p><button class="btn danger" id="reset" type="button">Reset to defaults</button></div></div>
+</div>
+</main>
+<footer class="foot"><div class="foot-in">
+<p><b>How this works:</b> stories are ordered by how many different outlets covered them, then by recency. Nothing learns from you. Left, center and right are one maintainer's judgment, not facts (<a href="sources.html">every source and its label</a>).</p>
+<p>Numbers here are counts and timings you could recount by hand (<a href="methods.html">how each is made</a>). <a href="archive.html">Archive</a> &middot; <a href="data/latest.json">Data as JSON</a>. Popularity labels link to the platform they come from.</p>
+<p><b>Follow without an account:</b> <a href="feed.xml">Atom feed</a>, <a href="breaking.xml">Breaking</a> and <a href="blindspots.xml">Blindspots</a> feeds, and <a href="sources.opml">the source list as OPML</a>. Add any of them to a feed reader, or to another copy of this project as a source. <a href="methods.html#feeds">What is in them</a></p>
+<p>Source code: <a href="https://github.com/h-nt3r/tally-news">github.com/h-nt3r/tally-news</a> &middot; License: <a href="https://github.com/h-nt3r/tally-news/blob/main/LICENSE">AGPL-3.0</a> &middot; <a href="fork.html">Run your own copy</a><span class="kb-only"> &middot; <button type="button" class="linkbtn" id="keysBtn">Keyboard shortcuts</button></span></p>
+</div></footer>
+</body></html>
