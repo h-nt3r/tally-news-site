@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="referrer" content="no-referrer">
+<meta name="built" content="1795578483">
+<meta name="description" content="An open, forkable news aggregator. Your sources, your rules.">
+<meta name="theme-color" content="#f5f6f8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Crect x=%222%22 y=%225%22 width=%225%22 height=%2214%22 rx=%222%22 fill=%22%232563eb%22/%3E%3Crect x=%229.5%22 y=%225%22 width=%225%22 height=%2214%22 rx=%222%22 fill=%22%2394a3b8%22/%3E%3Crect x=%2217%22 y=%225%22 width=%225%22 height=%2214%22 rx=%222%22 fill=%22%23dc2626%22/%3E%3C/svg%3E">
+<title>How the numbers are made · Tally News</title>
+<link rel="stylesheet" href="style.css">
+<link rel="alternate" type="application/atom+xml" title="Tally News" href="feed.xml"><link rel="alternate" type="application/atom+xml" title="Tally News · Breaking" href="breaking.xml"><link rel="alternate" type="application/atom+xml" title="Tally News · Blindspots" href="blindspots.xml">
+<script src="app.js" defer></script>
+<script src="clips.js" defer></script>
+</head><body data-page="methods" data-base="">
+<!--
+THESIS: A news-aggregator utility that looks like the category it belongs to, with every rule, source and label in plain view; refuses mystique; machine-written text is always labelled, and any stated perspective is added later and kept separate.
+OWN-WORLD: The category standard played straight: white and near-black surfaces, system sans, one teal accent for actions, muted blue, gray and red for left, center and right always paired with a word; light and dark by device.
+STORY: A reader sees how each side covers a story, why it is listed, and can change sources, filters and settings, or fork the code.
+FIRST VIEWPORT: Header with name and nav, section tabs, compact Show controls with the ordering rule, a swipeable strip of tall clip cards, then the Videos row (six on desktop, the rest a tap away), then the first story with its coverage bar.
+FORM: Category standard (the standing exit), AllSides, Feedly and Ground News as the bar; seed 3394116d.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+-->
+<a class="skip" href="#main">Skip to main content</a>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html" aria-label="Tally News, home"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="5" height="14" rx="2" fill="var(--left)"/><rect x="9.5" y="5" width="5" height="14" rx="2" fill="var(--center)"/><rect x="17" y="5" width="5" height="14" rx="2" fill="var(--right)"/></svg><span>Tally News</span></a>
+<nav class="primary" aria-label="Main"><a href="index.html"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h11v14H7a2 2 0 0 1-2-2V5z"/><path d="M16 9h3v8a2 2 0 0 1-2 2"/><path d="M8 9h5M8 12h5M8 15h3"/></svg><span>News</span></a><a href="latest.html"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7v5l3 2"/><circle cx="12" cy="12" r="8"/></svg><span>Latest</span></a><a href="chat.html"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 6a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-6l-4 4v-4H7a2 2 0 0 1-2-2V6z"/><path d="M9 8h6M9 11h4"/></svg><span>Ask</span></a><a href="sources.html"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 7h10M9 12h10M9 17h10"/><path d="M5 7h.01M5 12h.01M5 17h.01"/></svg><span>Sources</span></a><a href="settings.html"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h8M17 8h2M5 16h2M11 16h8"/><circle cx="15" cy="8" r="2"/><circle cx="9" cy="16" r="2"/></svg><span>Settings</span></a></nav>
+</div></header>
+<main id="main" tabindex="-1"><div class="page prose">
+<h1>How the numbers are made</h1>
+<p class="lede">Everything on this site that looks like data is a count or a time you could recount by hand. There are no scores, ratings or verdicts. Here is what each number is, how it is worked out, and what it cannot tell you.</p>
+
+<h2 id="timeline">First reported, and the coverage timeline</h2>
+<p>Every item in an outlet&rsquo;s feed carries a publish time. For each story, the outlet in our list that published first is shown as &ldquo;first reported&rdquo;. &ldquo;All three sides had covered it by&rdquo; is the time the last of left, center and right first appeared, and the gap is measured from the first report.</p>
+<p>The timeline draws one dot per outlet in a lane for its side, with time running left to right from the first report to the latest. &ldquo;Show as a table&rdquo; lists the same times as text.</p>
+<p><b>What it cannot tell you:</b></p>
+<ul>
+<li>&ldquo;First&rdquo; means first among the outlets on the <a href="sources.html">Sources page</a>, not first in the world. A wire service or a small outlet outside the list may have run it earlier.</li>
+<li>Some feeds report when an item was last updated rather than when it first appeared, so a time can be later than the real one.</li>
+<li>A publish time can never be in the future. If a feed reports one (a wrong clock, or a post scheduled ahead), we treat the item as published when we first saw it, and the Sources page says how many items were treated that way.</li>
+<li>Timing shows when, not how important or how original the reporting was. Many outlets reprint the same wire story.</li>
+<li>Times are shown in your device&rsquo;s time zone. On a story page each one also carries its UTC time in brackets, and the citation uses UTC only.</li>
+</ul>
+<p>If you switch off an outlet or a side, &ldquo;first reported&rdquo; and the timeline are recalculated without it, so an outlet you have hidden is never named as first. The &ldquo;all three sides&rdquo; sentence is about every outlet, so it is hidden while any switch is off. While any switch is changing what you see, the news page and each story page say so near the top, because a number you cite can differ from the one a colleague sees.</p>
+
+<h2 id="grouping">How headlines are grouped into stories</h2>
+<p>Headlines are first grouped by how similar their wording is, within US, World and Tech. A second pass then looks at each whole story and joins any that are the same event but were split, for example one filed under US by some outlets and World by others. It compares all of a story&rsquo;s headlines together and joins stories that are close enough (the cutoff is <code>merge_threshold</code> in <code>config/sources.toml</code>, 0 turns it off). A joined story goes under the topic most of its outlets chose.</p>
+<p>This is still wording, not understanding, so it can miss two stories about one event (they stay separate) or, rarely, join two that are only related. Stories that are related but distinct are left apart on purpose.</p>
+
+<h2 id="types">Outlet types</h2>
+<p>Next to an outlet on the Sources page and on each story page, a small tag says how that outlet is funded or owned. It is a plain fact about the outlet, not a rating of it, and it is separate from left, center and right. The tags are:</p>
+<ul>
+<li><b>Wire service</b>: an agency that sells reporting to other news outlets.</li>
+<li><b>Public broadcaster</b>: a service paid for mainly with public money, such as a licence fee or government and public funding.</li>
+<li><b>State-funded</b>: paid for and owned by a national government.</li>
+<li><b>Nonprofit</b>: run by a nonprofit organization and funded by donations, memberships or grants.</li>
+<li><b>Commercial</b>: a for-profit company funded by advertising, subscriptions or both.</li>
+</ul>
+<p>These are one maintainer&rsquo;s classification from public information, and an outlet can fit more than one. An outlet with no tag has not been classified yet, which does not mean anything about it. The type is set in <code>config/sources.toml</code> and can be changed in your own copy.</p>
+
+<h2 id="labels">Story labels</h2>
+<p>A story is labelled with the words that a third or more of its outlets&rsquo; headlines have in common (at least two outlets), kept in the order they appear in the headline that contains the most of them, with a dot between separate phrases. It is deliberately not any one outlet&rsquo;s headline, because choosing which outlet leads would be an editorial decision. When fewer than two words are shared, the label falls back to the earliest report&rsquo;s headline and the page says whose it is.</p>
+<p>The label is generated, so it can read awkwardly, and it can change as more outlets join. The real wording is always in the columns beneath it, where every outlet&rsquo;s own headline appears.</p>
+
+<h2 id="counts">The summary line and the blind-spot flag</h2>
+<ul>
+<li><b>Stories:</b> groups of two or more outlets reporting the same event in this update, up to 15 per section. Outlets are grouped by comparing the words in their headlines and summaries, so now and then two stories merge or one splits.</li>
+<li><b>Articles:</b> everything fetched from every feed in the last 36 hours, before grouping.</li>
+<li><b>Outlets:</b> how many different outlets had at least one item in that window. The summary line always counts every outlet, whatever your switches say.</li>
+<li><b>Covered by all three sides:</b> a story with at least one left, one center and one right outlet.</li>
+<li><b>No right-side (or left-side) coverage:</b> a story with three or more outlets, in a section that has outlets on that side, where none of them is on that side. A section with no right-labeled outlets never claims a right-side gap.</li>
+<li><b>Quickest to reach all three sides:</b> the story where the gap described above was shortest.</li>
+</ul>
+<p>These describe the stories on the news page, not all news. The side labels are one maintainer&rsquo;s judgment and are editable (see <a href="fork.html">Run your own</a>).</p>
+
+<h2 id="feeds">The feeds and the source list</h2>
+<p>Three Atom feeds carry the same stories as the page, so you can follow them in any feed reader or add them to another copy of this project as a source: <a href="feed.xml">feed.xml</a> (every story shown), <a href="breaking.xml">breaking.xml</a> and <a href="blindspots.xml">blindspots.xml</a>. Each entry has the story&rsquo;s neutral label, a link to its page here, how many outlets covered it and from which sides, who reported it first, and a link to every outlet&rsquo;s own article. When a machine-written summary exists it is included and marked as machine-written and possibly wrong. The categories say the topic and whether the story is Breaking or a Blindspot. <a href="sources.opml">sources.opml</a> lists every outlet this copy follows, grouped by topic, with its left, center or right label in a <code>tally:side</code> attribute; those labels are one maintainer&rsquo;s judgment, so another copy can import the list and change them.</p>
+<p>The feeds are only written when the copy has a public address set (<code>base_url</code> in <code>config/sources.toml</code>), because a feed needs full addresses. Headlines and links belong to their publishers; the feeds say so in their rights line.</p>
+<h2 id="blindspots">What counts as a blindspot</h2>
+<p>A story is listed under Blindspots when all of these are true, and nothing else is looked at:</p>
+<ul>
+<li>at least 3 outlets have it, and every one of them is labelled left, or every one is labelled right;</li>
+<li>its first report is at least 3 hours old, so outlets from other sides have had time to cover it;</li>
+<li>the section it sits in (US, World or Tech) has outlets from the other sides to compare with.</li>
+</ul>
+<p>Stories with the most outlets come first, and at most 6 are shown. A story still in Breaking is left out until it settles. The numbers are settings in <code>config/sources.toml</code> (they start with <code>blindspot</code>). This is a count of who covered a story among the outlets we track, not a claim that anyone is hiding it: an outlet may not have covered it for good reasons, the story may matter little to it, or the outlet's feed may be missing something. Left and right are one maintainer's labels, so edit them if you disagree. Center-only stories are not listed, because center is not a side to be missing from.</p>
+<h2 id="breaking">What counts as breaking</h2>
+<p>The Breaking section lists stories that look like they are unfolding right now. It is one stated rule about timing and spread, not a judgment about importance. A story is breaking when its first report is at most 4 hours old and either of these is true:</p>
+<ul>
+<li>at least 3 outlets have it, and at least 2 of them reported in the last 60 minutes (it is still spreading), or</li>
+<li>at least 2 outlets have it, and the first report is less than 45 minutes old (it is brand new).</li>
+</ul>
+<p>At most 4 stories are shown, those with the most outlets reporting in the last hour first. Times are the ones each outlet's own feed gives, and the page is rebuilt every 5 minutes on the default schedule, so a story can appear or disappear a little late. The numbers are settings in <code>config/sources.toml</code> (they start with <code>breaking</code>). Many outlets reporting something is not proof that it is true or that it matters; early reports are often wrong, and the timestamps can be off.</p>
+<h2 id="pages">Pages that have no feed</h2>
+<p>Some sources, like a city council's news page or a union's announcements, publish no feed. A group can watch such a page instead. The first time it looks, it only remembers the headline-like links already there, so old items do not flood the news. After that, each link that newly appears is a new item.</p>
+<p>Items from a watched page are dated by when this site first saw the link, because pages rarely say when something was posted. That can be later than the real posting time, so it can make a story look newer than it is. A watched page is looked at no more than once every 30 minutes however often the site rebuilds, only if the site's <code>robots.txt</code> allows it, and only the headline text, the link and the time are kept. Which links count as headlines is a guess from the link text and address, and can include or miss things; the Sources page shows what each watcher found.</p>
+<h2 id="summaries">Machine-written summaries</h2>
+<p>When you open a story, the first thing you see can be a two-sentence summary of what happened. A small open language model (Qwen, run through llama.cpp) writes it on the computer that builds this site, from the headlines and short excerpts the outlets' own feeds provide. Nothing is sent to an outside service.</p>
+<p>The model is told to use only facts that appear in the excerpts and to leave out outlets, political sides and anything about how coverage differs. How outlets differ is never model-written: the outlets' own headlines are listed below it, grouped by side.</p>
+<p>Every summary must pass a mechanical check before it is shown: it may not name an outlet or a side, and any number or proper name in it must appear in the excerpts. That check catches invented names and numbers, <b>not</b> wrong or out-of-date claims, so a summary can still be wrong. Failed summaries are not shown. The instructions the model is given are a plain file, <code>config/summary_prompt.txt</code>; change it and the summaries are rewritten on the next builds.</p>
+<h2 id="ask">The Ask page</h2>
+<p>When it is switched on (<code>chat = true</code> in <code>config/sources.toml</code>), the Ask page answers questions about today&rsquo;s stories. It runs on the computer that builds this site, with the same small open model as the summaries (Qwen, through llama.cpp). Nothing is sent to any outside service, and your questions are not logged. A copy of the site hosted somewhere else cannot answer, because the model is not there; its menu does not show the page.</p>
+<p><b>Lookups are counted, not written.</b> A question that is really a lookup is answered by plain code filtering the data file, instantly and with no model, so the answer cannot be invented. The rules are fixed:</p>
+<ul>
+<li><b>Only by a side:</b> the story has at least one report from that side and none from the other two.</li>
+<li><b>Missed by a side:</b> for left and right, the story carries the &ldquo;Not covered by&rdquo; flag, the rule in <a href="#counts">the summary line section</a>: at least 3 outlets covered it, in a section that has outlets on that side. The News page never flags a center gap, so for center the same 3-outlet rule is applied here: at least 3 outlets, none from the center. Asking which a side missed that another covered also requires the second side to have reported it.</li>
+<li><b>Covered by all sides:</b> each of left, center and right has at least one report.</li>
+<li><b>Main stories:</b> the stories covered by the most outlets, in the order the News page shows them.</li>
+<li><b>Newest:</b> stories sorted by the time of their first report, latest first. A story that gained reports later is not moved up.</li>
+<li><b>Who reported first:</b> the outlet and side of the story&rsquo;s earliest report, as on <a href="#timeline">the coverage timeline</a>, with the same caveats. &ldquo;Which stories did the right report first&rdquo; lists the stories whose first report came from a right outlet, and &ldquo;which side usually reports first&rdquo; tallies those firsts over every story.</li>
+</ul>
+<p>Extra words narrow a lookup (&ldquo;which did the left miss about Iran&rdquo;). Lists show at most 8 stories, and the answer says so when it cut one. When nothing qualifies, it says that plainly.</p>
+<p><b>Other questions are matched, then answered from stored text.</b> Your words are matched to today&rsquo;s stories by the words they share (lightly stemmed, so reinstated matches reinstates). A story is picked only if it is a reasonably close match and holds at least half of your meaningful words; if none is, the answer is &ldquo;That is not in today&rsquo;s coverage&rdquo;, and the model is never called. If a picked story already has its <a href="#summaries">summary</a>, that is the answer, shown at once. A button then asks the model to compare how the left, center and right headlines worded the top story. That model sees only that story&rsquo;s headlines, grouped by side, with outlet names left out so it cannot misname one; its instructions are in <code>config/chat_prompt.txt</code>. A story with no summary yet gets a model-written answer from its headlines instead.</p>
+<p><b>What it cannot tell you:</b></p>
+<ul>
+<li>It only knows the stories on the News page, which are the ones several outlets covered. A headline only one outlet ran is not in its reach; the <a href="latest.html">Latest page</a> searches those.</li>
+<li>A summary or a comparison is machine-written and can be wrong or leave things out. The summary check only catches invented names and numbers, not wrong claims. Every answer lists the stories it came from, with each outlet&rsquo;s own headline, so you can check.</li>
+<li>It answers one question at a time and remembers nothing, so a follow-up has to say what it is about.</li>
+<li>On an older laptop, a model-written answer takes from about ten seconds to a minute or more. Lookups and stored summaries do not wait for the model.</li>
+<li>Started with <code>--lan</code>, a phone on your own Wi-Fi can ask, and so can anyone else on that network, using your computer&rsquo;s processor. It refuses anything outside a private network, so do not use it on public Wi-Fi.</li>
+</ul>
+<h2 id="outlets">Counts for each outlet</h2>
+<p>On the Sources page, &ldquo;In N of M stories&rdquo; is how many of the page&rsquo;s stories include that outlet, and &ldquo;Earliest report in K&rdquo; is in how many it published first. Small numbers say little: an outlet that publishes less often, or that covers different subjects, will show less. These are not measures of quality or reliability.</p>
+
+<h2 id="data">The data file</h2>
+<p>The same numbers are published as <a href="data/latest.json">data/latest.json</a>, rebuilt with every update: each story with its outlets, sides, headlines, links and publish times, the summary counts, and every source. Anyone can load it into a spreadsheet, a notebook or a dashboard.</p>
+<p>Headlines and links belong to their publishers. License for the counts and timings and the code that makes them: <a href="https://github.com/h-nt3r/tally-news/blob/main/LICENSE">AGPL-3.0</a>.</p>
+
+<h2 id="archive">What is remembered, and for how long</h2>
+<p>The build keeps an archive on the machine that builds this site. It is not published. For every headline it has seen it keeps the link, the outlet, the side label, the publish time, when it was first and last seen, and every version of the headline. It keeps no article text and nothing about readers. Entries older than a year are deleted.</p>
+<p><b>Story ids.</b> Each story keeps the same id from build to build, even as outlets join it. A new group of headlines takes the id of the earlier story it shares the most headlines with. If a story splits, the larger part keeps the id and the other part gets a new one. If two stories merge, the merged story keeps the id of the one it overlaps most, and the other id stops being updated but stays in the archive. Because stories are grouped by wording, ids are only as reliable as that grouping.</p>
+<p><b>Headline edits.</b> If a feed shows a different headline for the same link than it did before, both versions are kept with the times they were seen, and the data file lists them under <code>headline_versions</code> on the story's reports, and under <code>headline_edits</code> for every tracked article whose headline changed in the last seven days, including ones that are not in a story on the page. This only catches changes between our checks, which run about every 20 minutes. A change made before we first saw a headline, or between two checks, is invisible, and a feed that merely reformats a title can look like an edit.</p>
+<p>Once an hour the build also saves a small summary: story sizes, how many stories had no left or right coverage, and how often each headline word appeared. It is kept in a <code>history/</code> folder next to the archive and entries older than 90 days are deleted. Nothing is shown from the summaries yet; comparing today with a typical day needs about a week of them.</p>
+
+<h2 id="story-pages">Story pages and citing a story</h2>
+<p>Every story has its own page at <code>story/&lt;id&gt;.html</code> and its own data file at <code>story/&lt;id&gt;.json</code>. The id stays the same as outlets join. The page lists every report the archive holds for the story, across days, with a timeline whose ticks are relative to the first report (+6 h, +1 d), and any headline changes with the removed words struck through and the added words underlined. The <a href="archive.html">Archive</a> lists the last 14 days of stories and can be filtered by a word.</p>
+<h3 id="cite">What to keep in mind when you cite one</h3>
+<ul>
+<li>The numbers describe the <b>tracked outlets only</b>. Say which list you used; the citation text links to it. A fork or another copy of this site will track different outlets.</li>
+<li>&ldquo;First reported&rdquo; means first among those outlets, by the publish time in each feed.</li>
+<li>A story page shows the story <b>as it stands now</b>, not a frozen copy. It changes as outlets join. The citation says when the page was last updated (a report was added or a headline changed) and when you retrieved it. If you need a fixed copy, download the story&rsquo;s JSON file and keep it.</li>
+<li>The story&rsquo;s label is generated from shared words (see <a href="#labels">Story labels</a>). If you quote wording, quote an outlet&rsquo;s own headline from the list of reports, and name the outlet.</li>
+<li>Stories are grouped by wording, so a page can include a report that is only loosely about the same event, or miss one that is. Check the reports against the originals before you rely on them; every report links to its article.</li>
+<li>Times in the citation are in UTC. The page shows your local time with the UTC time beside it, so you can check one against the other.</li>
+</ul>
+
+<h2 id="social">Clips and posts</h2>
+<p>Short video is where a lot of news first appears, so this site also follows accounts you choose on open platforms: Bluesky accounts, and, if you add them, Mastodon accounts and hashtags and Reddit communities. They appear under &ldquo;Clips and posts&rdquo; and on the <a href="sources.html">Sources page</a>.</p>
+<ul>
+<li><b>How they are fetched.</b> By this site&rsquo;s own program on each build, from public feeds. Each clip&rsquo;s preview frame is copied onto this site at the same time, so your browser asks no outside server for anything until you tap a clip. The video thumbnails in the Videos row are copied the same way. The page also asks your browser not to tell any site which page you came from.</li>
+<li><b>How a clip plays.</b> Tap a card and the clip plays in this site&rsquo;s own player, which streams the clip&rsquo;s public file straight from the address the platform publishes. No platform embed, script, cookie or account is involved, and nothing plays by itself. At that moment, and only then, the platform&rsquo;s server sees an ordinary file request from your device (your address and browser type), like any download. Only the clip on screen is loaded; scrolling away stops it. A small open-source player library (hls.js, copied onto this site) is used in browsers that cannot play this video format themselves, and is only loaded when you first play a clip.</li>
+<li><b>What does not play here.</b> Posts from Reddit and any platform without a public video file open on their own site (or on a front end you choose, see <a href="fork.html">Run your own</a>) when you click them.</li>
+<li><b>Order.</b> Newest first. Never ranked by likes, views or reposts, and those numbers are not shown.</li>
+<li><b>Video only by default.</b> An account&rsquo;s posts that include a video. Set <code>kind = "all"</code> for an account to include every post.</li>
+<li><b>Matching to stories.</b> By wording, between a post&rsquo;s text and a story&rsquo;s headlines, with a minimum closeness (<code>post_match</code> in the config). It can pair a post loosely or miss one, and a post with no caption is never matched.</li>
+<li><b>Not checked.</b> Items are shown as the accounts published them. We have not verified that a clip is real, current, or what its caption says. Look at who posted it, and check with a second source before you rely on it.</li>
+<li><b>Not counted.</b> Clips and posts are not outlets. They have no side label and never count toward the left, center and right numbers, &ldquo;first reported&rdquo; or the blind-spot flags.</li>
+<li><b>Not covered.</b> TikTok and Instagram have no open public feed, and this site does not scrape them.</li>
+</ul>
+
+<h2 id="left-out">Left out on purpose</h2>
+<ul>
+<li><b>Bias, sentiment or reliability scores.</b> They are contested, and a single score reads as this site&rsquo;s verdict.</li>
+<li><b>&ldquo;Wording only one side used.&rdquo;</b> We tried it on a day of real headlines. Outlets on every side mostly repeat the same wire phrasing, so it found almost nothing, and what it found was noise (&ldquo;months&rdquo;, &ldquo;died&rdquo;, &ldquo;comedian&rdquo;). It would have suggested framing differences that are mostly not there.</li>
+</ul>
+</div>
+</main>
+<footer class="foot"><div class="foot-in">
+<p><b>How this works:</b> stories are ordered by how many different outlets covered them, then by recency. Nothing learns from you. Left, center and right are one maintainer's judgment, not facts (<a href="sources.html">every source and its label</a>).</p>
+<p>Numbers here are counts and timings you could recount by hand (<a href="methods.html">how each is made</a>). <a href="archive.html">Archive</a> &middot; <a href="data/latest.json">Data as JSON</a>. Popularity labels link to the platform they come from.</p>
+<p><b>Follow without an account:</b> <a href="feed.xml">Atom feed</a>, <a href="breaking.xml">Breaking</a> and <a href="blindspots.xml">Blindspots</a> feeds, and <a href="sources.opml">the source list as OPML</a>. Add any of them to a feed reader, or to another copy of this project as a source. <a href="methods.html#feeds">What is in them</a></p>
+<p>Source code: <a href="https://github.com/h-nt3r/tally-news">github.com/h-nt3r/tally-news</a> &middot; License: <a href="https://github.com/h-nt3r/tally-news/blob/main/LICENSE">AGPL-3.0</a> &middot; <a href="fork.html">Run your own copy</a><span class="kb-only"> &middot; <button type="button" class="linkbtn" id="keysBtn">Keyboard shortcuts</button></span></p>
+</div></footer>
+</body></html>
